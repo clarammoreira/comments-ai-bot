@@ -182,8 +182,120 @@ const contracResume = [
 ]
 ```
 
-### ➡︎
--
+### ➡︎ pages/contracts/create/create.spec.js
+- 35: falta importação omissa import { it } from "vitest"
 
 ```javascript
+import {beforeEach, describe, vi} from "vitest";
+```
+
+- 37: uso constante desnecessário de flushPromises, utilize uma vez após modificar wrapper.vm.step
+```javascript
+// Nesse arquivo, é usada 6 vezes. Essas 4 abaixo, mais 2.
+
+  it("should return to previous step when the 'return' and keep the 'advance' button without disabled", async () => {
+    wrapper.vm.isNextStepDisabled = false;
+    await flushPromises();
+
+    await wrapper.findByTestId("advance-button", true).trigger("click");
+    expect(wrapper.vm.step).toBe(1);
+    await flushPromises();
+
+    await wrapper.findByTestId("return-button", true).trigger("click");
+    expect(wrapper.vm.step).toBe(0);
+
+    await flushPromises();
+    expect(wrapper.findByTestId("advance-button", true).attributes("disabled")).toBeUndefined();
+  });
+```
+
+- 41: a busca pelo botão de 'avançar' pode ser feita sem true, ou precisa ser descrito exatamente como o seletor de teste
+- 42: a busca pelo botão de 'retorna' pode ser feita sem true, ou precisa ser descrito exatamente como seletor de teste
+
+```javascript
+ it("should initialize with the 'advance' button disabled and without 'return' button", () => {
+    expect(wrapper.findByTestId("advance-button", true).attributes("disabled")).toBeDefined();
+    expect(wrapper.findByTestId("return-button", true).exists()).toBe(false);
+  });
+```
+
+- 63: remova o teste duplicado do botão de voltara
+
+```javascript
+it("should return to previous step when the 'return' button is clicked and step is higher than 0", async () => {
+  wrapper.vm.isNextStepDisabled = false;
+
+  await flushPromises();
+  await wrapper.findByTestId("advance-button", true).trigger("click");
+  expect(wrapper.vm.step).toBe(1);
+
+  await flushPromises();
+  await wrapper.findByTestId("return-button", true).trigger("click");
+  expect(wrapper.vm.step).toBe(0);
+
+});
+
+it("should return to previous step when the 'return' and keep the 'advance' button without disabled", async () => {
+  wrapper.vm.isNextStepDisabled = false;
+  await flushPromises();
+
+  await wrapper.findByTestId("advance-button", true).trigger("click");
+  expect(wrapper.vm.step).toBe(1);
+  await flushPromises();
+
+  await wrapper.findByTestId("return-button", true).trigger("click");
+  expect(wrapper.vm.step).toBe(0);
+
+  await flushPromises();
+  expect(wrapper.findByTestId("advance-button", true).attributes("disabled")).toBeUndefined();
+});
+```
+
+### ➡︎ pages/contracts/create/generalData/GeneralData.vue
+- 6: "contractCreate.generalData.consultantData" foi alterado para "contractCreate.generalData.title_consultant", o que pode não refletir a intenção original.
+
+```javascript
+// Foi criado um título para cada section. title_consultant é um deles
+// O consultantData é um array de objetos com os dados de cada input da section
+// São coisas diferentes
+
+  title_consultant:"Dados do consultor",
+  title_institutionalData:"Dados do Institucionais",
+  title_adress:"Localização",
+  title_infoGeral:"Informações Gerais",
+```
+
+- 9: A classe "bg-blac" foi removida. Verifique se é necessário manter.
+
+```javascript
+// Essa classe não existe mais no projeto
+```
+
+- 19: "consultantData" foi alterado para "ConsultantData", o que pode causar erro caso a variável não tenha sido renomeada.
+
+```javascript
+// Foi alterado de camelCase para PascalCase (OK)
+```
+
+- 22: "input.id" foi alterado para "input.testId". Certifique-se de que todos os inputs possuem a propriedade "testId".
+
+```javascript
+// Os inputs tem essa propriedade
+
+const ConsultantData = [
+  {
+    label: "contractCreate.generalData.label.consultant",
+    testId: "consultant-select",
+    placeholder: "contractCreate.generalData.select.consultant",
+    items: ["João da Silva", "Pedro de Souza", "Maria de Lima"],
+    modelValue: ref(null),
+  },
+  {
+    label: "contractCreate.generalData.label.time",
+    testId: "tempo-vigencia-select",
+    placeholder: "contractCreate.generalData.select.time",
+    items: [" 1", " 2", " 3"],
+    modelValue: ref(null),
+  },
+];
 ```
