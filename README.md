@@ -149,7 +149,37 @@ import {PhGear, PhHouse, PhList, PhFileText,PhUsers} from "@phosphor-icons/vue";
 - 153: utilização incorreta de ref (deveria ser chamada nas declarações de variáveis dentro das listas de objetos contractData, checkoutConfig e contractResume)
 
 ```javascript
-// Realmente, na development existe essa variável. Ela é declarada e utilizada com esse nome, por isso não deu erro. (OK)
+// Realmente, essas variáveis são declaradas sem o ref (OK)
+
+const contractData = [
+  {
+    id: "salesPrice",
+    label: "contractCreate.contract.label.salesPrice",
+    placeholder: "contractCreate.contract.input.salesPrice",
+    type: "text",
+    modelValue: ref("")
+  },
+...
+]
+
+const checkoutConfig = {
+  id: "paymentType",
+  label: "contractCreate.contract.label.paymentType",
+  placeholder: "contractCreate.contract.select.paymentType",
+  items: [" 1", " 2", " 3"],
+  modelValue: ref(null)
+};
+
+const contracResume = [
+  {
+    id: "observation",
+    label: "contractCreate.contract.label.observation",
+    placeholder: "contractCreate.contract.input.observation",
+    type: "text",
+    modelValue: ref("")
+  },
+  ...
+]
 ```
 
 ### ➡︎
