@@ -74,10 +74,26 @@ it("should initialize with 'Test route' option without active class", () => {
 
 ### ➡︎ components/UserDropdown.vue
 - 12: user[0].avatar deve ser alterado para user.avatar para manter a consistência com o código atualizado.
+- 17: user[0].name deve ser alterado para user.name para manter a consistência com o código atualizado.
+- 18: user[0].role deve ser alterado para user.role para manter a consistência com o código atualizado.
 
 ```javascript
-// user.avatar já está sendo utilizado no código
-// user[0].avatar não existe 
+// user.avatar, user.name e user.role já estão sendo utilizados no código
+// user[0].avatar, user[0].name e user[0].role não existem 
+```
+
+### ➡︎ components/users/UserActions.spec.js
+- 4: espaço ausente entre `{ }`
+- 5: espaço em branco ausente após virgula "describe"
+- 7: importação duplicada de "@vue/test-utils" e import * as componentes não utilizados
+- 17: mock de useRouter não está sendo restaurado após os testes
+- 21: mock de toggleUserStatus não está sendo restaurado após os testes
+- 27: mock de provide.toast.show não está sendo restaurado após os testes
+- 33: nome inconsistente no describe, "Product list screen" deveria refletir o teste de "User Actions"
+- 68: falta de nova linha no final do arquivo
+
+```javascript
+// Esse arquivo não existe nessa branch (feat/TG-214)
 ```
 
 ### ➡︎ 
@@ -90,29 +106,5 @@ it("should initialize with 'Test route' option without active class", () => {
 ```javascript
 ```
 
-### ➡︎ 
-
-```javascript
-```
-
-### ➡︎ 
-
-```javascript
-```
-
-### ➡︎ 
-
-```javascript
-```
-
-### ➡︎ 
-
-```javascript
-```
-
-### ➡︎ 
-
-```javascript
-```
 
 
