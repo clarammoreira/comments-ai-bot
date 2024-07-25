@@ -118,18 +118,98 @@ import {PhGear, PhHouse, PhList, PhFileText,PhUsers} from "@phosphor-icons/vue";
 
 ### ➡︎ locales/pt-BR.ts
 - 92: users bloco foi removido completamente causando dados de usuários a serem perdidos.
-- 103: toast: { contentLoad: "Falha ao carregar os dados" } foi removido; pode ocasionar falta de mensagens de erro.
-- 70: Adição de quebra de linha excessiva na string copyCode, o que pode dificultar manutenção do código.
-- 119: Inconsistência na tradução: Consultant foi traduzido para "consultor" enquanto UF mantém a sigla em português.
-- 117: Duplicação de chave consultant em generalData.label e generalData.input; pode causar problemas na renderização.
-- 141: total_alunos foi traduzido incorretamente após alteração duplicada.
-- 144: cidade vs. city e bairro vs. neighborhood: alterar para uniformidade.
-- 282: Inconsistência nos rótulos, alguns foram modificados para inglês: profile em userDropdown enquanto outros permanecem em português.
-- 373: Bug na duplicação dos dados users causados pela remoção e adição.
-- 
 
 ```javascript
 // O objeto se users não existe nessa branch, mas existe na development
+```
+
+- 103: toast: { contentLoad: "Falha ao carregar os dados" } foi removido; pode ocasionar falta de mensagens de erro.
+
+```javascript
+// Esse objeto não existe mais no código
+```
+
+- 70: Adição de quebra de linha excessiva na string copyCode, o que pode dificultar manutenção do código.
+
+```javascript
+// Acredito que ela quebrou a linha porque a frase é longa
+
+copyCode:
+  "Copie o código do contrato no botão abaixo ou envie para o email da escola informado no contrato.",
+```
+
+- 119: Inconsistência na tradução: Consultant foi traduzido para "consultor" enquanto UF mantém a sigla em português.
+
+```javascript
+// Bem observado! No arquivo pt-BR.ts, algumas variáveis estão em português.
+// Esse objeto contractCreate, por exemplo, está quase todo em português
+
+contractCreate: {
+  label: {
+    consultant: "Nome consultor  *",
+    time: "Tempo de vigência  *",
+    schoolName: "Nome da instituição *",
+    fantasyName: "Nome fantasia *",
+    cnpj: "CNPJ *",
+    mecCode: "Código MEC *",
+    cep: "CEP *",
+    cidade: "Cidade *",
+    bairro: "Bairro *",
+    uf: "UF *",
+    endereco: "Endereço *",
+    numero: "Número *",
+    complemento: "Complemento",
+    email: "Email do Representante *",
+    telefone: "Telefone *",
+    total_alunos: "Total de Alunos *",
+    tipo_escola: "Tipo de Escola *",
+    faturamento: "Faturamento Anual *",
+  },
+  input: {
+    schoolName: "Digite o nome da instituição",
+    fantasyName: "Digite o nome fantasia",
+    cnpj: "Digite o CNPJ da empresa",
+    mecCode: "Digite o código MEC",
+    cep: "Digite o CEP",
+    cidade: "Digite a cidade",
+    bairro: "Digite o nome do bairro",
+    uf: "PE",
+    endereco: "Digite o endereço",
+    numero: "Digite o número",
+    complemento: "Digite um complemento",
+    email: "Digite o email do representante",
+    telefone: "Digite o telefone",
+    total_alunos: "Selecione o total de alunos",
+  },
+  ...
+}
+```
+
+- 117: Duplicação de chave consultant em generalData.label e generalData.input; pode causar problemas na renderização.
+- 141: total_alunos foi traduzido incorretamente após alteração duplicada.
+
+```javascript
+// Realmente, total_alunos está em português, mas não está duplicado.
+// As 2 ocorrências estão dentro de objetos diferentes.
+// Uma está dentro do objeto label e a outra dentro de input 
+```
+
+- 144: cidade vs. city e bairro vs. neighborhood: alterar para uniformidade.
+
+```javascript
+// Faz sentido (OK)
+```
+
+- 282: Inconsistência nos rótulos, alguns foram modificados para inglês: profile em userDropdown enquanto outros permanecem em português.
+
+```javascript
+// Faz sentido (OK)
+```
+
+- 373: Bug na duplicação dos dados users causados pela remoção e adição. 
+
+```javascript
+// Nessa branch, o objeto users não existe
 ```
 
 ### ➡︎ nuxt.config.ts
